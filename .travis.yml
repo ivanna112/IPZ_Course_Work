@@ -1,0 +1,32 @@
+os: linux
+
+language: python
+python: 
+  - "3.7.7"
+dist: xenial
+
+stages:
+  - Tests 
+
+before_install:
+  - sudo apt update
+  - nvm install v12.6
+  - pip install gdown
+  - pip install poetry
+  - chmod +x dev.sh
+
+install:
+  - cd client
+  - npm install
+  - cd ../
+  - gdown $CheckpointUrl -O checkpoint.tar.gz
+  - tar -xvf checkpoint.tar.gz
+  - mv checkpoint/* server/algorythm/checkpoint
+  - rm -rf checkpoint.tar.gz checkpoint/
+  - cd server && poetry install && cd ../
+
+jobs:
+  include:
+    - stage: Tests      
+      script: pytest tests.py
+
