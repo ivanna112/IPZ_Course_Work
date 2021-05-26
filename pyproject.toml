@@ -5,7 +5,7 @@ description = "Generates music in a few different genres"
 authors = ["n4mespace <zaxarchuk.d@gmail.com>"]
 
 [tool.poetry.dependencies]
-python = "3.7.7"
+python = "3.7.10"
 quart = "*"
 hypercorn = "*"
 tox = "*"
